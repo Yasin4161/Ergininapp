@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Profil Bilgileri</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 900px;
+        background-color: white;
+        margin: 30px auto;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+        color: #333;
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 5px;
+    }
+    .row {
+        display: flex;
+        margin-bottom: 10px;
+    }
+    .col {
+        flex: 1;
+        margin: 5px;
+    }
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 3px;
+    }
+    input, textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #aaa;
+        border-radius: 5px;
+    }
+    textarea {
+        resize: vertical;
+    }
+    .buttons {
+        margin-top: 20px;
+        text-align: right;
+    }
+    button {
+        padding: 10px 15px;
+        margin-left: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Profil Bilgileri</h2>
+
+    <div class="row">
+        <div class="col">
+            <label>Ad Soyad</label>
+            <input type="text" value="dsa">
+        </div>
+        <div class="col">
+            <label>Kullanıcı Adı</label>
+            <input type="text" value="dsa">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label>TC Kimlik No</label>
+            <input type="text" value="55444546745">
+        </div>
+        <div class="col">
+            <label>Doğum Tarihi</label>
+            <input type="date" value="2001-01-03">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label>Yaş</label>
+            <input type="number" value="24">
+        </div>
+        <div class="col">
+            <label>Telefon</label>
+            <input type="tel" value="0 (455) 654 64 54">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label>E-posta</label>
+            <input type="email" value="dsa@kalibilisim.com.tr">
+        </div>
+        <div class="col">
+            <label>IBAN</label>
+            <input type="text" value="TR121511501514212222152152">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label>İl</label>
+            <input type="text" value="Kocaeli">
+        </div>
+        <div class="col">
+            <label>İlçe</label>
+            <input type="text" value="İzmit">
+        </div>
+    </div>
+
+    <div>
+        <label>Adres</label>
+        <textarea rows="3">asd dsaasda sdsada dmsa jdh... vhcjiv cxk</textarea>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label>Kayıt Tarihi</label>
+            <input type="datetime-local" value="2025-07-17T15:08">
+        </div>
+        <div class="col">
+            <label>Son Giriş IP</label>
+            <input type="text" value="85.105.20.94">
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button type="button" onclick="alert('Bilgiler kaydedildi!')">Kaydet</button>
+        <button type="reset">Temizle</button>
+    </div>
+</div>
+
+</body>
+</html>
