@@ -3,15 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Profil Bilgileri</title>
+  <title>Profil Bilgilerini Düzenle</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="topbar"></div>
-
-  <div class="container">
-    <form id="profileForm" class="card" autocomplete="on">
-      <h2>Profil Bilgileri</h2>
+  <main class="page">
+    <form id="profileForm" class="card" novalidate>
+      <h1>Profil Bilgilerini Düzenle</h1>
 
       <div class="grid">
         <div class="field">
@@ -32,64 +30,99 @@
 
         <div class="field">
           <label for="birth">Doğum Tarihi</label>
-          <input id="birth" class="input" type="date" max="" placeholder="GG/AA/YYYY" />
+          <input id="birth" class="input" type="date" max="" />
         </div>
 
         <div class="field">
           <label for="age">Yaş</label>
           <input id="age" class="input" type="number" min="0" step="1" placeholder="-" readonly />
-          <div class="helper">Doğum tarihinden otomatik hesaplanır</div>
         </div>
 
         <div class="field">
-          <label for="phone">Telefon</label>
-          <input id="phone" class="input" type="tel" placeholder="0 (5xx) xxx xx xx" />
+          <label for="phone">Telefon <span class="req">*</span></label>
+          <div class="input-wrap with-icon">
+            <span class="icon" aria-hidden="true">☎</span>
+            <input id="phone" class="input" type="tel" placeholder="0 (5xx) xxx xx xx" required />
+          </div>
         </div>
 
         <div class="field">
           <label for="email">E-posta</label>
-          <input id="email" class="input" type="email" placeholder="ornek@site.com" />
+          <div class="input-wrap with-icon">
+            <span class="icon" aria-hidden="true">✉</span>
+            <input id="email" class="input" type="email" placeholder="ornek@site.com" />
+          </div>
         </div>
 
         <div class="field">
-          <label for="iban">IBAN</label>
-          <input id="iban" class="input" type="text" placeholder="TR.. .. .." />
+          <label for="iban">IBAN <span class="req">*</span></label>
+          <div class="input-wrap with-icon">
+            <span class="icon" aria-hidden="true">₺</span>
+            <input id="iban" class="input" type="text" placeholder="TR.. .. .." required />
+          </div>
+          <div class="helper">TR ile başlayan 26 karakterli IBAN giriniz.</div>
         </div>
 
         <div class="field">
-          <label for="city">İl</label>
-          <input id="city" class="input" type="text" placeholder="İl" />
+          <label for="city">İl <span class="req">*</span></label>
+          <select id="city" class="input" required>
+            <option value="" selected disabled>İl seçin</option>
+          </select>
         </div>
 
         <div class="field">
-          <label for="district">İlçe</label>
-          <input id="district" class="input" type="text" placeholder="İlçe" />
+          <label for="district">İlçe <span class="req">*</span></label>
+          <select id="district" class="input" required disabled>
+            <option value="" selected>Önce İl Seçiniz</option>
+          </select>
         </div>
 
         <div class="field row-span-2">
-          <label for="address">Adres</label>
-          <textarea id="address" placeholder="Adres"></textarea>
+          <label for="address">Adres <span class="req">*</span></label>
+          <div class="input-wrap with-icon">
+            <span class="icon" aria-hidden="true">⌂</span>
+            <textarea id="address" placeholder="Adres"></textarea>
+          </div>
+          <div class="helper">En az 10, en fazla 255 karakter.</div>
+        </div>
+
+        <div class="divider col-span-2">Şifre Değiştir</div>
+
+        <div class="field">
+          <label for="oldPass">Mevcut Şifre</label>
+          <input id="oldPass" class="input" type="password" />
+        </div>
+
+        <div class="field">
+          <label for="newPass">Yeni Şifre</label>
+          <input id="newPass" class="input" type="password" minlength="6" placeholder="En az 6 karakter" />
+          <div id="passLen" class="helper"></div>
+        </div>
+
+        <div class="field">
+          <label for="newPass2">Yeni Şifre Tekrar</label>
+          <input id="newPass2" class="input" type="password" minlength="6" />
+          <div id="passMatch" class="helper"></div>
         </div>
 
         <div class="field">
           <label for="createdAt">Kayıt Tarihi</label>
-          <input id="createdAt" class="input" type="datetime-local" />
+          <input id="createdAt" class="input" type="text" placeholder="-" readonly />
         </div>
 
         <div class="field">
-          <label for="ip">Son Giriş IP</label>
-          <input id="ip" class="input" type="text" placeholder="x.x.x.x"
-                 pattern="^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$" />
+          <label for="lastIp">Son Giriş IP</label>
+          <input id="lastIp" class="input" type="text" placeholder="-" readonly />
         </div>
       </div>
 
       <div class="actions">
-        <button type="button" class="btn" id="printBtn">Yazdır</button>
+        <button type="button" class="btn ghost" id="printBtn">Yazdır</button>
         <button type="reset" class="btn" id="resetBtn">Temizle</button>
-        <button type="submit" class="btn primary">Kaydet</button>
+        <button type="submit" class="btn primary" id="saveBtn">Bilgileri Güncelle</button>
       </div>
     </form>
-  </div>
+  </main>
 
   <div class="toast" id="toast">Bilgiler kaydedildi.</div>
   <script src="app.js" defer></script>
