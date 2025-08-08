@@ -1,149 +1,266 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<title>Profil Bilgileri</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f2f2f2;
-        margin: 0;
-        padding: 0;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profil Bilgileri</title>
+  <style>
+    :root{
+      --brand:#2e7d32;          /* üst şerit rengi */
+      --bg:#f3f5f7;
+      --card:#fff;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --radius:12px;
     }
-    .container {
-        max-width: 900px;
-        background-color: white;
-        margin: 30px auto;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      color:var(--text);
+      background:var(--bg);
     }
-    h2 {
-        color: #333;
-        border-bottom: 2px solid #ccc;
-        padding-bottom: 5px;
+    .topbar{
+      height:58px;
+      background:linear-gradient(90deg,var(--brand),#2fbf71);
     }
-    .row {
-        display: flex;
-        margin-bottom: 10px;
+    .container{
+      max-width:1100px;
+      margin:-28px auto 48px;
+      padding:0 16px;
     }
-    .col {
-        flex: 1;
-        margin: 5px;
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      box-shadow:0 10px 30px rgba(0,0,0,.06);
+      border-radius:var(--radius);
+      padding:22px;
     }
-    label {
-        font-weight: bold;
-        display: block;
-        margin-bottom: 3px;
+    h2{
+      margin:0 0 16px;
+      font-size:22px;
     }
-    input, textarea {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #aaa;
-        border-radius: 5px;
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px 18px;
     }
-    textarea {
-        resize: vertical;
+    @media (max-width:780px){
+      .grid{grid-template-columns:1fr}
     }
-    .buttons {
-        margin-top: 20px;
-        text-align: right;
+    .field{display:flex; flex-direction:column}
+    .field label{
+      font-size:12px;
+      color:var(--muted);
+      letter-spacing:.2px;
+      margin:3px 0 6px;
     }
-    button {
-        padding: 10px 15px;
-        margin-left: 10px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
+    .input, textarea, select{
+      width:100%;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      background:#fff;
+      outline:none;
+      transition:border .15s, box-shadow .15s;
     }
-    button:hover {
-        background-color: #45a049;
+    .input:focus, textarea:focus, select:focus{
+      border-color:#94d3a2;
+      box-shadow:0 0 0 3px rgba(47,191,113,.15);
     }
-</style>
+    textarea{resize:vertical; min-height:88px}
+    .row-span-2{grid-row:span 2}
+    .actions{
+      margin-top:18px;
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+    .btn{
+      padding:10px 14px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background:#fff;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background:var(--brand);
+      color:#fff;
+      border-color:transparent;
+    }
+    .btn:hover{filter:brightness(1.03)}
+    .helper{
+      font-size:12px;color:var(--muted);margin-top:4px
+    }
+
+    /* küçük toast bildirimi */
+    .toast{
+      position:fixed; inset:auto 16px 18px auto;
+      background:#111; color:#fff; padding:10px 12px;
+      border-radius:10px; opacity:0; transform:translateY(10px);
+      transition:all .25s; pointer-events:none; z-index:50;
+    }
+    .toast.show{opacity:1; transform:translateY(0)}
+    @media (prefers-color-scheme:dark){
+      :root{ --bg:#0b1220; --card:#0f172a; --text:#e5e7eb; --border:#1f2937; --muted:#94a3b8 }
+      .btn{background:#111827;color:#e5e7eb;border-color:#374151}
+    }
+  </style>
 </head>
 <body>
+  <div class="topbar"></div>
+  <div class="container">
+    <form id="profileForm" class="card" autocomplete="on">
+      <h2>Profil Bilgileri</h2>
 
-<div class="container">
-    <h2>Profil Bilgileri</h2>
+      <div class="grid">
+        <!-- sol -->
+        <div class="field">
+          <label for="fullname">Ad Soyad</label>
+          <input id="fullname" class="input" type="text" placeholder="Ad Soyad" required value="dsa" />
+        </div>
 
-    <div class="row">
-        <div class="col">
-            <label>Ad Soyad</label>
-            <input type="text" value="dsa">
+        <div class="field">
+          <label for="username">Kullanıcı Adı</label>
+          <input id="username" class="input" type="text" required value="dsa" />
         </div>
-        <div class="col">
-            <label>Kullanıcı Adı</label>
-            <input type="text" value="dsa">
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col">
-            <label>TC Kimlik No</label>
-            <input type="text" value="55444546745">
+        <div class="field">
+          <label for="tckn">TC Kimlik No</label>
+          <input id="tckn" class="input" inputmode="numeric" maxlength="11" pattern="^[0-9]{11}$" placeholder="11 haneli" required value="55444546745" />
+          <div class="helper">Sadece rakam, 11 hane</div>
         </div>
-        <div class="col">
-            <label>Doğum Tarihi</label>
-            <input type="date" value="2001-01-03">
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col">
-            <label>Yaş</label>
-            <input type="number" value="24">
+        <div class="field">
+          <label for="birth">Doğum Tarihi</label>
+          <input id="birth" class="input" type="date" max="" required value="2001-01-03" />
         </div>
-        <div class="col">
-            <label>Telefon</label>
-            <input type="tel" value="0 (455) 654 64 54">
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col">
-            <label>E-posta</label>
-            <input type="email" value="dsa@kalibilisim.com.tr">
+        <div class="field">
+          <label for="age">Yaş</label>
+          <input id="age" class="input" type="number" min="0" step="1" readonly value="24" />
+          <div class="helper">Doğum tarihinden otomatik hesaplanır</div>
         </div>
-        <div class="col">
-            <label>IBAN</label>
-            <input type="text" value="TR121511501514212222152152">
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col">
-            <label>İl</label>
-            <input type="text" value="Kocaeli">
+        <div class="field">
+          <label for="phone">Telefon</label>
+          <input id="phone" class="input" type="tel" placeholder="0 (5xx) xxx xx xx" value="0 (455) 654 64 54" />
         </div>
-        <div class="col">
-            <label>İlçe</label>
-            <input type="text" value="İzmit">
+
+        <div class="field">
+          <label for="email">E-posta</label>
+          <input id="email" class="input" type="email" required value="dsa@kalibilisim.com.tr" />
         </div>
-    </div>
 
-    <div>
-        <label>Adres</label>
-        <textarea rows="3">asd dsaasda sdsada dmsa jdh... vhcjiv cxk</textarea>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <label>Kayıt Tarihi</label>
-            <input type="datetime-local" value="2025-07-17T15:08">
+        <div class="field">
+          <label for="iban">IBAN</label>
+          <input id="iban" class="input" type="text" placeholder="TR.. .. .." value="TR121511501514212222152152" />
         </div>
-        <div class="col">
-            <label>Son Giriş IP</label>
-            <input type="text" value="85.105.20.94">
+
+        <div class="field">
+          <label for="city">İl</label>
+          <input id="city" class="input" type="text" value="Kocaeli" />
         </div>
-    </div>
 
-    <div class="buttons">
-        <button type="button" onclick="alert('Bilgiler kaydedildi!')">Kaydet</button>
-        <button type="reset">Temizle</button>
-    </div>
-</div>
+        <div class="field">
+          <label for="district">İlçe</label>
+          <input id="district" class="input" type="text" value="İzmit" />
+        </div>
 
+        <div class="field row-span-2">
+          <label for="address">Adres</label>
+          <textarea id="address" class="" placeholder="Adres">asd dsaasda sdsada dmsa jdh asjhkjas jfjsdahfj hdsj fmdskjsm jscv öjxhj vhçjh vjxjk hsjh vjcjv hcxjhvcjxkjvhcxj mncvh kj js jkvxc kjv vhcjv cxk</textarea>
+        </div>
+
+        <div class="field">
+          <label for="createdAt">Kayıt Tarihi</label>
+          <input id="createdAt" class="input" type="datetime-local" value="2025-07-17T15:08" />
+        </div>
+
+        <div class="field">
+          <label for="ip">Son Giriş IP</label>
+          <input id="ip" class="input" type="text" placeholder="x.x.x.x" pattern="^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$" value="85.105.20.94" />
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn" id="printBtn">Yazdır</button>
+        <button type="reset" class="btn" id="resetBtn">Temizle</button>
+        <button type="submit" class="btn primary">Kaydet</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="toast" id="toast">Bilgiler kaydedildi.</div>
+
+  <script>
+    // === Yardımcı: bugünün tarihini "max" olarak koy ve yaş hesapla ===
+    const birth = document.getElementById('birth');
+    const age = document.getElementById('age');
+    birth.max = new Date().toISOString().slice(0,10);
+
+    function calcAge(){
+      if(!birth.value) return;
+      const b = new Date(birth.value);
+      const t = new Date();
+      let a = t.getFullYear() - b.getFullYear();
+      const m = t.getMonth() - b.getMonth();
+      if (m < 0 || (m === 0 && t.getDate() < b.getDate())) a--;
+      age.value = isFinite(a) && a >= 0 ? a : '';
+    }
+    birth.addEventListener('change', calcAge);
+    calcAge();
+
+    // === Maskeler ===
+    const onlyDigits = v => v.replace(/\D+/g,'');
+    // Telefon: 0 (5xx) xxx xx xx
+    const phone = document.getElementById('phone');
+    phone.addEventListener('input', () => {
+      const d = onlyDigits(phone.value).slice(0,11); // 0 + 10 hane
+      let out = '';
+      if(d.length>0) out = d[0];
+      if(d.length>=1) out = d[0] + ' ';
+      if(d.length>=4) out += '(' + d.slice(1,4) + ') ';
+      else if(d.length>1) out += '(' + d.slice(1) ;
+      if(d.length>=7) out += d.slice(4,7) + ' ';
+      if(d.length>=9) out += d.slice(7,9) + ' ';
+      if(d.length>=11) out += d.slice(9,11);
+      phone.value = out.trim();
+    });
+
+    // IBAN: TRxx xxxx xxxx ...
+    const iban = document.getElementById('iban');
+    iban.addEventListener('input', () => {
+      let v = iban.value.toUpperCase().replace(/[^A-Z0-9]/g,'');
+      if(!v.startsWith('TR')) v = 'TR' + v.replace(/^TR/,'');
+      v = v.match(/.{1,4}/g)?.join(' ') ?? v;
+      iban.value = v.slice(0, 29); // TR + 24 hane + 6 boşluk
+    });
+
+    // TCKN sadece rakam
+    const tckn = document.getElementById('tckn');
+    tckn.addEventListener('input', () => {
+      tckn.value = onlyDigits(tckn.value).slice(0,11);
+    });
+
+    // === Form işlemleri ===
+    const form = document.getElementById('profileForm');
+    const toast = document.getElementById('toast');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if(!form.checkValidity()){
+        form.reportValidity();
+        return;
+      }
+      // (Burada gerçek kaydetme isteği gönderilebilir)
+      toast.classList.add('show');
+      setTimeout(()=>toast.classList.remove('show'), 2000);
+    });
+
+    document.getElementById('printBtn').addEventListener('click', () => window.print());
+    document.getElementById('resetBtn').addEventListener('click', () => setTimeout(calcAge, 0));
+  </script>
 </body>
 </html>
